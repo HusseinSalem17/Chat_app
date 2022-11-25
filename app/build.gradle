@@ -1,0 +1,93 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.hussein.chatme"
+        minSdk 23
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+        //Enable multiDex after adding dependency
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    /*
+    Enabling View Binding
+        View binding is a feature that allows you to more easily write code that interacts with views.
+        Once view binding  is enabled in a module, it generates a binding class for each XML layout
+        file present in that module. An instance of a binding class contains direct references to all
+        views that have an ID in the corresponding layout.
+     */
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //Scalable Size Unit (support for different screen sizes)
+    /*
+    SDP => a scalable size unit
+        An android lib that provides a new size unit - sdp (scalable dp).
+        This size unit scales with the screen size. it can help Android
+        developers with supporting multiple screens sizes.
+    SSP => a scalable size unit for texts
+        An android lib that provides a new size unit -ssp (scalable sp).
+        This size unit scales with the screen size based on the sp size unit (for texts).
+        it can help Android developers with supporting multiple screens sizes.
+     */
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    //Rounded ImageView
+    /*
+    Rounded ImageView
+        A fast imageView (and Drawable) that supports rounded corners
+        (and ovals or circles). It supports many additional features
+        including ovals, rounded rectangles, ScaleTypes, and TileMode
+     */
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //firebase
+    //As you can see, dependency for firebase cloud messaging is added from(tools => firebase
+//        -> cloud Messaging then add the dependency also can check connecting my app with firebase
+    implementation 'com.google.firebase:firebase-messaging:23.1.0'
+    //fireStore database is added (tools => firebase => cloud firebase)
+    implementation 'com.google.firebase:firebase-firestore:24.4.1'
+
+    /*
+    Enabling MultiDex
+        Android application(APK) files contain executable by bytecode files in the form or Dalvik
+        Executable(DEX) files, which contain the compiled code used to run your app. THe Dalvik Executable
+        specification limits the total number of methods that can be referenced within a single DeX file to 65.536
+        , including Android framework methods, library methods, and methods in your own code. Getting
+        past this limit requires that uou configure your app build process to generate more than one DEX
+        file, known as MultiDex configuration
+     */
+    implementation 'androidx.multidex:multidex:2.0.1'
+}

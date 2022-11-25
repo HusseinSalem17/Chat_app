@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "528209577378",
+    "project_id": "chat-app-ea952",
+    "storage_bucket": "chat-app-ea952.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528209577378:android:a73d1264cb194616a01efb",
+        "android_client_info": {
+          "package_name": "com.hussein.chatme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528209577378-h9p3qjlpaiprpmg9hgin3v0lid59ckls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL4deVIxOh8nlIGlFBj858tbt5XGkqkzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528209577378-h9p3qjlpaiprpmg9hgin3v0lid59ckls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
