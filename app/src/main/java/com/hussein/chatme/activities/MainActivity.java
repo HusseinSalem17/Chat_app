@@ -13,11 +13,15 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.hussein.chatme.adapters.RecentConversationAdapter;
 import com.hussein.chatme.databinding.ActivityMainBinding;
+import com.hussein.chatme.models.ChatMessage;
 import com.hussein.chatme.utilities.Constants;
 import com.hussein.chatme.utilities.PreferenceManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /*
@@ -29,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager;
+    private List<ChatMessage> conversations;
+    private RecentConversationAdapter conversationAdapter;
+    private FirebaseFirestore database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +43,24 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
+        init();
         loadUserDetails();
         //put FCM in FirebaseFireStore
         getToken();
         setListeners();
     }
 
+    private void init(){
+        conversations=new ArrayList<>();
+        conversationAdapter=new RecentConversationAdapter(conversations);
+        binding.conversationsRecyclerView.setAdapter(conversationAdapter);
+        database=FirebaseFirestore.getInstance();
+    }
+
     private void setListeners() {
         //after click sign out the FCM will remove from the database(firebaseFireStore)
         binding.imageSignOut.setOnClickListener(v -> signOut());
-        binding.fabNewChat.setOnClickListener(v-> startActivity(new Intent(getApplicationContext(),UsersActivity.class)));
+        binding.fabNewChat.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), UsersActivity.class)));
     }
 
     private void loadUserDetails() {
